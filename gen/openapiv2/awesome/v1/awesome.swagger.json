@@ -48,6 +48,52 @@
     }
   },
   "definitions": {
+    "enumsAccessTier": {
+      "type": "string",
+      "enum": [
+        "ACCESS_TIER_UNSPECIFIED",
+        "ACCESS_TIER_ARCHIVE",
+        "ACCESS_TIER_COOL",
+        "ACCESS_TIER_HOT"
+      ],
+      "default": "ACCESS_TIER_UNSPECIFIED"
+    },
+    "messagesPet": {
+      "type": "object",
+      "properties": {
+        "birthdayUtc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "messagesReport": {
+      "type": "object",
+      "properties": {
+        "accessTier": {
+          "$ref": "#/definitions/enumsAccessTier"
+        },
+        "archived": {
+          "type": "boolean"
+        },
+        "generatedUtc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "pet": {
+          "$ref": "#/definitions/messagesPet"
+        },
+        "title": {
+          "type": "string"
+        },
+        "uri": {
+          "type": "string"
+        }
+      }
+    },
     "protobufAny": {
       "type": "object",
       "properties": {
@@ -75,36 +121,14 @@
         }
       }
     },
-    "v1AccessTier": {
-      "type": "string",
-      "enum": [
-        "ACCESS_TIER_UNSPECIFIED",
-        "ACCESS_TIER_ARCHIVE",
-        "ACCESS_TIER_COOL",
-        "ACCESS_TIER_HOT"
-      ],
-      "default": "ACCESS_TIER_UNSPECIFIED"
-    },
     "v1FindReportByPetNameResponse": {
       "type": "object",
       "properties": {
         "report": {
-          "$ref": "#/definitions/v1Report"
+          "$ref": "#/definitions/messagesReport"
         },
         "privacy": {
           "$ref": "#/definitions/v1Privacy"
-        }
-      }
-    },
-    "v1Pet": {
-      "type": "object",
-      "properties": {
-        "birthdayUtc": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "name": {
-          "type": "string"
         }
       }
     },
@@ -116,30 +140,6 @@
         "PRIVACY_HIGH"
       ],
       "default": "PRIVACY_UNSPECIFIED"
-    },
-    "v1Report": {
-      "type": "object",
-      "properties": {
-        "accessTier": {
-          "$ref": "#/definitions/v1AccessTier"
-        },
-        "archived": {
-          "type": "boolean"
-        },
-        "generatedUtc": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "pet": {
-          "$ref": "#/definitions/v1Pet"
-        },
-        "title": {
-          "type": "string"
-        },
-        "uri": {
-          "type": "string"
-        }
-      }
     }
   }
 }

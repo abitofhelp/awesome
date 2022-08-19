@@ -3,11 +3,9 @@ name: buf.build/abitofhelp/awesome
 deps:
   - buf.build/googleapis/googleapis
   - buf.build/grpc-ecosystem/grpc-gateway
-  - buf.build/abitofhelp/abcdapis
 breaking:
   use:
     - FILE
-
 lint:
   use:
     - DEFAULT

@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "enums/v1/access_tier.proto",
+    "title": "awesome/v1/enums/access_tier.proto",
     "version": "version not set"
   },
   "consumes": [

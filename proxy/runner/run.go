@@ -6,7 +6,6 @@ import (
 	"github.com/abitofhelp/awesome/config"
 	awesomev1 "github.com/abitofhelp/awesome/gen/go/awesome/v1"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
-	//	proxyv5 "github.com/ingios/project/v5/gen/go/project/v5"
 	logger "github.com/labstack/gommon/log"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"

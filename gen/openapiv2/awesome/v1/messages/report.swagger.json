@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "google/api/annotations.proto",
+    "title": "awesome/v1/messages/report.proto",
     "version": "version not set"
   },
   "consumes": [

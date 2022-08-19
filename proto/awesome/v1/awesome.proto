@@ -3,7 +3,7 @@ syntax = "proto3";
 package awesome.v1;
 
 import "google/api/annotations.proto";
-import "messages/v1/report.proto";
+import "awesome/v1/messages/report.proto";
 
 enum Privacy {
   PRIVACY_UNSPECIFIED = 0;
@@ -15,7 +15,7 @@ message FindReportByPetNameRequest {
   string pet_name = 1;
 }
 message FindReportByPetNameResponse {
-  messages.v1.Report report = 1;
+  awesome.v1.messages.Report report = 1;
   Privacy privacy = 2;
 }
 

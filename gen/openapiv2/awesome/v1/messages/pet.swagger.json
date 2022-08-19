@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "messages/v1/report.proto",
+    "title": "awesome/v1/messages/pet.proto",
     "version": "version not set"
   },
   "consumes": [

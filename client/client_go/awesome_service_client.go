@@ -13,6 +13,21 @@ const (
 	kConnectionTimeOut = 1000 * time.Second
 )
 
+type PetReport struct {
+	Report struct {
+		AccessTier   string    `json:"accessTier"`
+		Archived     bool      `json:"archived"`
+		GeneratedUtc time.Time `json:"generatedUtc"`
+		Pet          struct {
+			BirthdayUtc time.Time `json:"birthdayUtc"`
+			Name        string    `json:"name"`
+		} `json:"pet"`
+		Title string `json:"title"`
+		URI   string `json:"uri"`
+	} `json:"report"`
+	Privacy string `json:"privacy"`
+}
+
 // AwesomeServiceClient implements the client_go.Persistence/gRPC AwesomeServiceClient interface.
 type AwesomeServiceClient struct {
 	client Persistence
@@ -37,9 +52,9 @@ func NewAwesomeServiceClient(host string, port uint64) (*AwesomeServiceClient, e
 	}
 }
 
-func (x *AwesomeServiceClient) FindReportByPetName(ctx context.Context, name string) (string, error) {
+func (x *AwesomeServiceClient) FindReportByPetName(ctx context.Context, name string) (*PetReport, error) {
 	if len(name) == 0 {
-		return "", fmt.Errorf("the name cannot be empty or blank")
+		return nil, fmt.Errorf("the name cannot be empty or blank")
 	}
 
 	ctx, cancel := context.WithTimeout(ctx, kConnectionTimeOut)
@@ -48,9 +63,35 @@ func (x *AwesomeServiceClient) FindReportByPetName(ctx context.Context, name str
 	if r, err := x.findReportByPetName(ctx, &awesomev1.FindReportByPetNameRequest{
 		PetName: name,
 	}); err == nil {
-		return r.Report.Pet.Name, nil
+
+		report := &PetReport{
+			Report: struct {
+				AccessTier   string    `json:"accessTier"`
+				Archived     bool      `json:"archived"`
+				GeneratedUtc time.Time `json:"generatedUtc"`
+				Pet          struct {
+					BirthdayUtc time.Time `json:"birthdayUtc"`
+					Name        string    `json:"name"`
+				} `json:"pet"`
+				Title string `json:"title"`
+				URI   string `json:"uri"`
+			}{
+				AccessTier:   r.Report.AccessTier.String(),
+				Archived:     r.Report.Archived,
+				GeneratedUtc: r.Report.GeneratedUtc.AsTime(),
+				Pet: struct {
+					BirthdayUtc time.Time `json:"birthdayUtc"`
+					Name        string    `json:"name"`
+				}{
+					BirthdayUtc: r.Report.Pet.BirthdayUtc.AsTime(),
+					Name:        r.Report.Pet.Name},
+			},
+			Privacy: r.Privacy.String(),
+		}
+
+		return report, nil
 	} else {
-		return "", err
+		return nil, err
 	}
 }
 

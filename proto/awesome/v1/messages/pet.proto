@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package awesome.v1.messages;
+
+import "google/protobuf/timestamp.proto";
+
+message Pet {
+  google.protobuf.Timestamp birthday_utc = 1;
+  string name = 2;
+}

@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package awesome.v1.messages;
+
+import "google/protobuf/timestamp.proto";
+import "awesome/v1/enums/access_tier.proto";
+import "awesome/v1/messages/pet.proto";
+
+message Report {
+  awesome.v1.enums.AccessTier access_tier = 1;
+  bool archived = 2;
+  google.protobuf.Timestamp generated_utc = 3;
+  awesome.v1.messages.Pet pet = 4;
+  string title = 5;
+  string uri = 6;
+}
