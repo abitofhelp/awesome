@@ -11,7 +11,7 @@ bufclean:
 .PHONY:bufclean
 
 bufgen: bufclean bufbuild #buflint
-	@buf generate #--include-imports
+	@buf generate --include-imports
 .PHONY:bufgen
 
 buflint:

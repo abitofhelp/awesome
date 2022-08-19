@@ -1,0 +1,74 @@
+version: v1
+managed:
+  enabled: true
+
+  go_package_prefix:
+    default: github.com/abitofhelp/awesome/gen/go
+    except:
+      - buf.build/googleapis/googleapis
+  #java_package_prefix: com.ingios.project.gen.java
+
+plugins:
+#  ## CSHARP
+#  # TODO: Getting multiple gen of csharp code error...
+#  #  - remote: buf.build/protocolbuffers/plugins/csharp:v21.4.0-1
+#  #    out: gen/csharp
+#  #    opt: base_namespace=Ingios.Project
+#  #  - remote: buf.build/grpc/plugins/csharp:v1.48.0-1
+#  #    out: gen/csharp
+#
+  ## GO
+  - remote: buf.build/protocolbuffers/plugins/go:v1.28.1-1
+    out: gen/go
+    opt: paths=source_relative
+  - remote: buf.build/grpc/plugins/go:v1.2.0-1
+    out: gen/go
+    opt:
+      - paths=source_relative
+      - require_unimplemented_servers=false
+
+  ## GRPC GATEWAY
+  # generate reverse proxy from protocol definitions
+  - remote: buf.build/grpc-ecosystem/plugins/grpc-gateway:v2.11.2-1
+    out: gen/go
+    opt:
+      - paths=source_relative
+      - generate_unbound_methods=true
+      #- allow_repeated_fields_in_body=true
+
+#  ## JAVA
+#  - remote: buf.build/protocolbuffers/plugins/java:v21.4.0-1
+#    out: gen/java/src/main/java
+#  - remote: buf.build/grpc/plugins/java:v1.48.1-1
+#    out: gen/java/src/main/java
+
+  ## JAVASCRIPT
+  # https://slavovojacek.medium.com/grpc-on-node-js-with-buf-and-typescript-part-1-5aad61bab03b
+  #  - remote: buf.build/protocolbuffers/plugins/js:v3.20.1-1
+  #    out: gen/javascript/build/nodejs
+  #    opt:
+  #      - import_style=commonjs
+  #      - binary
+  #  - remote: buf.build/grpc/plugins/node:v1.11.2-1
+  #    out: gen/javascript/build/nodejs
+  #    opt:
+  #      - import_style=commonjs
+  #      # - mode=grpcwebtext # Assuming that DUI will not use a grpc client; Othewise, use grpcweb, which is much faster.
+
+#  ## KOTLIN
+#  # https://github.com/grpc/grpc-kotlin/project/master/compiler/README.md
+#  - remote: buf.build/protocolbuffers/plugins/kotlin:v21.4.0-1
+#    out: gen/kotlin/src/main/kotlin
+#  - remote: buf.build/grpc/plugins/kotlin:v1.3.0-2
+#    out: gen/kotlin/src/main/kotlin
+#
+  ## OPENAPI
+  # generate openapi documentation for api
+  - remote: buf.build/grpc-ecosystem/plugins/openapiv2:v2.11.2-1
+    out: gen/openapiv2
+    #opt: generate_unbound_methods=true
+
+  ## TYPESCRIPT
+  #  - remote: xxxxx
+  #    out: gen/javascript/build/nodejs
+  #    opt: grpc_js
