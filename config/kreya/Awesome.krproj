@@ -1,0 +1,16 @@
+{
+  "id": "4e5f6ea1-8669-431f-9a94-e62aec70f1c4",
+  "importStreams": [
+    {
+      "id": "7d063e61-4ad2-4d5d-810f-a912a3b5f3f9",
+      "name": "awesome",
+      "importerName": "GrpcServerReflection",
+      "createMissingOperations": true,
+      "options": {
+        "endpoint": "{{ HOST }}"
+      }
+    }
+  ],
+  "authConfigs": [],
+  "certificates": []
+}
