@@ -7,7 +7,7 @@ bufbuild:
 .PHONY:bufbuild
 
 bufclean:
-	@rm -rf "$(PROJECT_DIR)/grpc"
+	@rm -rf "$(PROJECT_DIR)/gen"
 .PHONY:bufclean
 
 bufgen: bufclean bufbuild #buflint
