@@ -84,7 +84,10 @@ func (x *AwesomeServiceClient) FindReportByPetName(ctx context.Context, name str
 					Name        string    `json:"name"`
 				}{
 					BirthdayUtc: r.Report.Pet.BirthdayUtc.AsTime(),
-					Name:        r.Report.Pet.Name},
+					Name:        r.Report.Pet.Name
+				},
+				Title: r.Report.Title,
+				URI: r.Report.Uri,
 			},
 			Privacy: r.Privacy.String(),
 		}
